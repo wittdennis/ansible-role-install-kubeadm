@@ -1,2 +1,10 @@
 ---
-# handlers file for role_remplate
+- name: INSTALL KUBEADM | Restart kubelet
+  listen: restart_kubelet
+  ansible.builtin.service:
+    name: kubelet
+    state: restarted
+
+- name: INSTALL KUBEADM | Reboot system
+  listen: reboot_system
+  ansible.builtin.reboot:
