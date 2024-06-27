@@ -1,2 +1,3 @@
 ---
-# defaults file for role_remplate
+install_kubeadm_kubernetes_version: v1.29.2
+install_kubeadm_disable_selinux: true
