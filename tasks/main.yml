@@ -1,5 +1,5 @@
 ---
-- name: INSTALL KUBEADM | Ensure dependencies are installed
+- name: Ensure dependencies are installed
   ansible.builtin.package:
     name:
       - curl
@@ -7,28 +7,28 @@
       - kernel-modules-extra
     state: present
 
-- name: INSTALL KUBEADM | Disable swap for the current session
+- name: Disable swap for the current session
   ansible.builtin.command:
     cmd: swapoff -a
   changed_when: false
 
-- name: INSTALL KUBEADM | Ensure that swap is disabled
+- name: Ensure that swap is disabled
   ansible.builtin.replace:
     path: /etc/fstab
     regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
     replace: '# \1'
 
-- name: INSTALL KUBEADM | Disable selinux
+- name: Disable selinux
   ansible.posix.selinux:
     policy: targeted
     state: permissive
   when: install_kubeadm_disable_selinux
 
-- name: INSTALL KUBEADM | Set repo version
+- name: Set repo version
   ansible.builtin.set_fact:
     kubernetes_repo_version: "{{ install_kubeadm_kubernetes_version | split('.') }}"
 
-- name: INSTALL KUBEADM | Setup Kubernetes yum repository
+- name: Setup Kubernetes yum repository
   ansible.builtin.yum_repository:
     name: kubernetes
     description: Official Kubernetes yum repository
@@ -47,7 +47,7 @@
       - kubernetes-cni
     state: present
 
-- name: INSTALL KUBEADM | Update sysctl to allow networking
+- name: Update sysctl to allow networking
   ansible.builtin.copy:
     content: |
       net.bridge.bridge-nf-call-ip6tables = 1
@@ -56,25 +56,25 @@
       net.ipv6.conf.all.forwarding = 1
     dest: /etc/sysctl.d/kubernetes.conf
     mode: "0644"
-  notify: reboot_system
+  notify: Reboot system
 
-- name: INSTALL KUBEADM | Set packages version
+- name: Set packages version
   ansible.builtin.set_fact:
     kubernetes_packages_version: "{{ install_kubeadm_kubernetes_version | regex_replace('v', '') }}"
 
-- name: INSTALL KUBEADM | Install Kubernetes packages
+- name: Install Kubernetes packages
   ansible.builtin.dnf:
     name:
       - kubelet-{{ kubernetes_packages_version }}
       - kubeadm-{{ kubernetes_packages_version }}
       - kubectl-{{ kubernetes_packages_version }}
     disable_excludes: all
-  notify: restart_kubelet
+  notify: Restart kubelet
 
-- name: INSTALL KUBEADM | Enable kubelet service
+- name: Enable kubelet service
   ansible.builtin.service:
     name: kubelet
     enabled: true
 
-- name: INSTALL KUBEADM | Flush handlers
+- name: Flush handlers
   ansible.builtin.meta: flush_handlers

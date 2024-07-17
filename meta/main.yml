@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Dennis Witt
   description: Installs kubeadm, kubelet and kubectl.
