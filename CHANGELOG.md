@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [1.0.2](https://github.com/wittdennis/ansible-role-install-kubeadm/compare/738e1976ab73cb27f0819a2923ef1799d9ceb591..1.0.2) - 2024-07-18
+#### Bug Fixes
+- use handlers correctly - ([5fdad13](https://github.com/wittdennis/ansible-role-install-kubeadm/commit/5fdad13a96bbdacd62d09c70d5094c7e0ad1f59f)) - Dennis Witt
+#### Continuous Integration
+- set latest tag only for conventional commit check - ([738e197](https://github.com/wittdennis/ansible-role-install-kubeadm/commit/738e1976ab73cb27f0819a2923ef1799d9ceb591)) - Dennis Witt
+#### Miscellaneous Chores
+- **(deps)** update ansible/ansible-lint action to v24.7.0 - ([6e85fc4](https://github.com/wittdennis/ansible-role-install-kubeadm/commit/6e85fc4110275e6cd6f1d21995576ebdb454d01b)) - wittdennis-renovate[bot]
+
+- - -
+
 ## [1.0.1](https://github.com/wittdennis/ansible-role-install-kubeadm/compare/98374e59c7f9a686e0543f42dc84750bca181cf7..1.0.1) - 2024-06-29
 #### Bug Fixes
 - set tags for ansible galaxy - ([0a45a66](https://github.com/wittdennis/ansible-role-install-kubeadm/commit/0a45a667fd560c2c85afe057dca8acacb8e1652f)) - Dennis Witt
